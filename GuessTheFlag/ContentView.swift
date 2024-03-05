@@ -79,7 +79,7 @@ struct ContentView: View {
             self.scoreTitle = "Correct"
             self.userScore += 1
         } else {
-            self.scoreTitle = "Wrong"
+            self.scoreTitle = "Wrong, this flag belongs to  \(countries[number])"
             if userScore > 0 {
                 self.userScore -= 1
             }
