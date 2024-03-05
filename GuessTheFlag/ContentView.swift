@@ -14,6 +14,7 @@ struct ContentView: View {
     @State private var showingScore = false
     @State private var scoreTitle = ""
     @State private var userScore = 0
+    @State private var maximumMoves = 0
     
     var body: some View {
         ZStack {
@@ -58,7 +59,7 @@ struct ContentView: View {
                 Spacer()
                 Spacer()
                 
-                Text("Score: ???")
+                Text("Score: \(userScore)")
                     .foregroundStyle(.white)
                     .font(.title.bold())
                 
@@ -84,13 +85,23 @@ struct ContentView: View {
                 self.userScore -= 1
             }
         }
-        
+        self.maximumMoves += 1
+        if maximumMoves > 8 {
+            self.restartGame()
+        }
         self.showingScore = true
     }
     
     func askQuestion() {
-        countries.shuffle()
-        correctAnswer = Int.random(in: 0...2)
+        self.countries.shuffle()
+        self.correctAnswer = Int.random(in: 0...2)
+    }
+    func restartGame() {
+        
+        self.countries.shuffle()
+        self.userScore = 0
+        self.maximumMoves = 0
+        
     }
 }
 
